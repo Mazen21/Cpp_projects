@@ -4,6 +4,12 @@ using namespace std;
 
 int main()
 {
-	std::cout <<"hello world";
-	return 0;
+	string mystr;
+	cout << "What's your name? ";
+	getline (cin, mystr);
+	cout << "what's your favorite team? ";
+	getline (cin, mystr);
+	cout << "I like " << mystr << " too! \n";
+	
+	return 1;
 }
