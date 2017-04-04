@@ -2,19 +2,32 @@
 #include <iostream>
 using namespace std;
 
-void printarray(int arg[], int length);
+int addition (int a, int b);
+int subtraction (int a, int b);
 
-int main()
-{
-	int firstarray[] = {5,10,15};
-	int secondarray[] = {2,4,6,8,10};
-	printarray (firstarray,3);
-	printarray( secondarray,5);
+int operation (int x, int y, int (*functocall)(int,int));
+
+int main(){
+	int m,n;
+	int (*minus)(int,int) = subtraction;
+	
+	m = operation(7,5,addition);
+	n = operation(20,m,minus);
+	cout <<m<<"\t"<<n;
+	
+	return 0;
 }
 
-void printarray(int arg[], int length){
-	cout << "Array \n" ;
-	for (int n = 0; n<length;++n){
-		cout << arg[n] << " \n";
-	}
+int addition (int a, int b){
+	return (a+b);
+}
+
+int subtraction (int a, int b){
+	return (a-b);
+}
+
+int operation (int x, int y, int (*functocall)(int,int)){
+	int g;
+	g = (*functocall)(x,y);
+	return (g);
 }
