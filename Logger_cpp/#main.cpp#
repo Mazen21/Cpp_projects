@@ -1,0 +1,10 @@
+#include "header/logger.hpp"
+
+
+
+void main(){
+	
+	Logger l;
+	l::printE("nombre d'eleve negatif");	
+	
+}
