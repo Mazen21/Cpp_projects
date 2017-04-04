@@ -1,26 +1,31 @@
 
 #include <iostream>
-#include <new>
+#include <string>
+#include <sstream>
 using namespace std;
 
+struct movies_t {
+	string title;
+	int year;
+};
+
 int main(){
-	int i,n;
-	int *p;
-	cout << "How many numbers would you like to type? ";
-	cin >> i;
-	p = new (nothrow) int[i];
-	if (p == NULL)
-		cout << "Error : memory could not be allocated";
-	else{
-		for(n=0;n<i;n++){
-			cout << "Enter number : ";
-			cin >> p[n];
-		}
-		cout << "You have entered: ";
-		for(n=0;n<i;n++){
-			cout << p[n] << ", ";
-		}
-		delete[] p;
-	}
+	
+	string mystr;
+	
+	movies_t amovie;
+	movies_t * pmovie;
+	pmovie = &amovie;
+	
+	cout << "Enter a title: ";
+	getline(cin, pmovie->title);
+	cout << "Enter year: ";
+	getline (cin,mystr);
+	(stringstream) mystr >> pmovie->year;
+	
+	cout << "\nYou have entered:\n";
+	cout << pmovie->title;
+	cout << " (" << pmovie->year << ")\n";
+	
 	return 0;
 }
