@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <fstream>
 
 using namespace std;
 
@@ -44,12 +45,44 @@ void LoggerConsol::printV(string const &mystr){
 	cout <<"\033[1;35m"<<"VERBOSITY :"<< mystr<<"\033[0m\n";	
 }
 
+/*LoggerFile class*/
+
+class LoggerFile : Logger {
+  private:
+	string logfile_name;
+  public:
+	LoggerFile(string filename);
+    void printE(string const &);
+	void printW(string const &);
+	void printV(string const &); 
+};
+
+LoggerFile::LoggerFile(string filname){
+	this->logfile_name = filname;
+	ofstream fout(this->logfile_name.c_str());
+}
+
+void LoggerFile::printE(string const &mystr){
+	std::ofstream outfile;
+	outfile.open(this->logfile_name.c_str(), std::ios_base::app);
+	outfile <<"ERROR :"<<mystr<<"\n";
+}
+void LoggerFile::printW(string const &mystr){
+	std::ofstream outfile;
+	outfile.open(this->logfile_name.c_str(), std::ios_base::app);
+	outfile <<"WARNING :"<<mystr<<"\n";
+}
+void LoggerFile::printV(string const &mystr){
+	std::ofstream outfile;
+	outfile.open(this->logfile_name.c_str(), std::ios_base::app);
+	outfile <<"VERBOSITY :"<<mystr<<"\n";	
+}
 
 
 int main(){
-	LoggerConsol Lc;
-	l.printE("error message");	
-	l.printW("warning message");
-	l.printV("verbosity message");
+	LoggerFile lf("Logfile.log");
+	lf.printE("wrong set of parameters");
+	lf.printW("wrong set dfdof parameters");
+	lf.printV("wrong set of parameters");
 	return 0;
 }
