@@ -2,23 +2,19 @@
 #include <iostream>
 using namespace std;
 
-template <class T>
-
-T sum (T a, T b)
-{
-	T result;
-	result = a+b;
-	return result;
-}
+void printarray(int arg[], int length);
 
 int main()
 {
-	int i=5, j=6, k;
-	double f=2.0, g=0.5, h;
-	
-	k=sum<int>(i,j);
-	h=sum<double>(f,g);
-	cout <<k<< '\n';
-	cout <<h<< '\n';
-	return 0;
+	int firstarray[] = {5,10,15};
+	int secondarray[] = {2,4,6,8,10};
+	printarray (firstarray,3);
+	printarray( secondarray,5);
+}
+
+void printarray(int arg[], int length){
+	cout << "Array \n" ;
+	for (int n = 0; n<length;++n){
+		cout << arg[n] << " \n";
+	}
 }
