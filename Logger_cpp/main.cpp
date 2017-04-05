@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-//#include "header/Bank.hpp"
+#include "header/Bank.hpp"
 
 using namespace std;
 
@@ -82,9 +82,9 @@ void LoggerFile::printV(string const &mystr){
 
 int main(){
 	LoggerFile lf("Logfile.log");
-//	Bank b;
+	Bank b;
 	cout <<"compiling using Makefile\n";
-//	b.bprintE("hello from bank");
+	b.bprintE("hello from bank");
 	lf.printE("jjdhf set of parameters");
 	lf.printW("wrong set dfdof parameters");
 	lf.printV("wrong set of parameters");
