@@ -49,14 +49,21 @@ void LoggerConsol::printV(string const &mystr){
 
 class LoggerFile : Logger {
   private:
+<<<<<<< HEAD
 	string logfile_name;
   public:
 	LoggerFile(string filename);
+=======
+	ofstream myfile;
+  public:
+	void create_file();
+>>>>>>> 3d6e788bc03b7470bf19e00c45c5726964e059d7
     void printE(string const &);
 	void printW(string const &);
 	void printV(string const &); 
 };
 
+<<<<<<< HEAD
 LoggerFile::LoggerFile(string filname){
 	this->logfile_name = filname;
 	ofstream fout(this->logfile_name.c_str());
@@ -76,13 +83,35 @@ void LoggerFile::printV(string const &mystr){
 	std::ofstream outfile;
 	outfile.open(this->logfile_name.c_str(), std::ios_base::app);
 	outfile <<"VERBOSITY :"<<mystr<<"\n";	
+=======
+void LoggerFile::create_file(){
+	
+	ofstream myfile("logfile.txt");
+}
+
+void LoggerFile::printE(string const &mystr){
+	//~ if(this->logfil.is_open()){
+	  //~ this->logfil<<"ERROR :"<< mystr;
+	//~ }
+}
+void LoggerFile::printW(string const &mystr){
+	cout <<"\033[1;33m"<<"WARNING :"<< mystr<<"\033[0m\n";	
+}
+void LoggerFile::printV(string const &mystr){
+	cout <<"\033[1;35m"<<"VERBOSITY :"<< mystr<<"\033[0m\n";	
+>>>>>>> 3d6e788bc03b7470bf19e00c45c5726964e059d7
 }
 
 
 int main(){
+<<<<<<< HEAD
 	LoggerFile lf("Logfile.log");
 	lf.printE("wrong set of parameters");
 	lf.printW("wrong set dfdof parameters");
 	lf.printV("wrong set of parameters");
+=======
+	LoggerFile lc;
+	lc.create_file();
+>>>>>>> 3d6e788bc03b7470bf19e00c45c5726964e059d7
 	return 0;
 }
