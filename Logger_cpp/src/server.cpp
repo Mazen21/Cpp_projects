@@ -3,7 +3,10 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include <iostream>
+#include <string.h>
 
+using namespace std;
 
 int main( int argc, char*argv[]){
 	int socket_desc, client_sock, c, read_size;
@@ -31,33 +34,34 @@ int main( int argc, char*argv[]){
 	}
 	puts("bind done");
 	
-	//Listen
-	listen(socket_desc, 3);
-	
-	//Accept and incoming connection
-	puts("Waiting for incoming connections...");
-	c = sizeof(struct sockaddr_in);
-	
-	//Accept connection from an incoming client
-	client_sock = accept(socket_desc, (struct sockaddr *)&client, (socklen_t*)&c);
-	if(client_sock < 0){
-		perror("accept failed");
-		return 1;
-	}
-	puts("Connection accepted");
-	
-	//Receive a message from client
-	while((read_size = recv(client_sock, client_message, 2000, 0)) > 0){
-		//display message
-		puts(client_message);
-	}
-	
-	if(read_size == 0){
-		puts("client disconnected");
-		fflush(stdout);
-	}
-	else if (read_size == -1){
-		perror("reception failed");
+	while(1){
+		//Listen
+		listen(socket_desc, 3);
+		
+		//Accept and incoming connection
+		puts("Waiting for incoming connections...");
+		c = sizeof(struct sockaddr_in);
+		
+		//Accept connection from an incoming client
+		client_sock = accept(socket_desc, (struct sockaddr *)&client, (socklen_t*)&c);
+		if(client_sock < 0){
+			perror("accept failed");
+			return 1;
+		}
+		cout<<"Connection accepted\n";
+		//Receive a message from client
+		while((read_size = recv(client_sock, client_message, 2000, 0)) > 0){
+			//display message
+			cout << client_message;
+		}
+		
+		if(read_size == 0){
+			puts("\nclient disconnected");
+			fflush(stdout);
+		}
+		else if (read_size == -1){
+			perror("\nreception failed");
+		}
 	}
 	return 0;
 }
