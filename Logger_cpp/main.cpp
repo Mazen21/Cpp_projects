@@ -4,8 +4,9 @@
 #include "header/Logger.hpp"
 
 using namespace std;
-
+ 
 int main(){
-	LoggerFile lf("Logfile.log");
+	LoggerTCP Lt;
 	
+	Lt.printE("Error");
 }

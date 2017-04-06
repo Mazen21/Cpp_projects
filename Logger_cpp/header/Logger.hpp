@@ -4,6 +4,10 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <sstream>
+#include <stdio.h>
+#include <sys/socket.h>
+#include <arpa/inet.h>
 using namespace std;
 
 /*Logger Class*/
@@ -30,6 +34,17 @@ class LoggerFile : Logger {
   public:
 	LoggerFile(string filename);
     void printE(string const &);
+	void printW(string const &);
+	void printV(string const &); 
+};
+
+/*LoggerTCP class*/
+class LoggerTCP : Logger {
+	public:
+	int sock;
+	struct sockaddr_in server;
+	LoggerTCP();
+	void printE(string const &);
 	void printW(string const &);
 	void printV(string const &); 
 };

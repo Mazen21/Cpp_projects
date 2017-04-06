@@ -43,3 +43,34 @@ void LoggerFile::printV(string const &mystr){
 	outfile.open(this->logfile_name.c_str(), std::ios_base::app);
 	outfile <<"VERBOSITY :"<<mystr<<"\n";	
 }
+
+/*LoggerTCP class*/
+LoggerTCP::LoggerTCP(){
+	//Create socket
+	this->sock = socket(AF_INET, SOCK_STREAM, 0);
+	if(this->sock == -1){
+		perror("Could not create socket");
+	}
+	puts("Socket Created");
+	
+	this->server.sin_addr.s_addr = inet_addr("127.0.0.1");
+	this->server.sin_family = AF_INET;
+	this->server.sin_port = htons(8888);
+	
+	//connect to remote server
+	if(connect(this->sock, (struct sockaddr*)&(this->server), sizeof(this->server)) < 0){
+		perror("connect failed. Error");
+	}
+	
+	puts("Connected");
+	puts("\n");
+}
+
+void LoggerTCP::printE(string const &mystr){
+	if (send(sock, (const char*)mystr.c_str(), strlen((const char*)mystr.c_str()), 0) < 0){
+		puts("Send failed");
+	}
+}	
+	
+	
+	
