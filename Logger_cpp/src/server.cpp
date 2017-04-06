@@ -39,7 +39,7 @@ int main( int argc, char*argv[]){
 		listen(socket_desc, 3);
 		
 		//Accept and incoming connection
-		puts("Waiting for incoming connections...");
+		puts("\n");
 		c = sizeof(struct sockaddr_in);
 		
 		//Accept connection from an incoming client
@@ -48,20 +48,13 @@ int main( int argc, char*argv[]){
 			perror("accept failed");
 			return 1;
 		}
-		cout<<"Connection accepted\n";
+		//~ cout<<"\n";
 		//Receive a message from client
 		while((read_size = recv(client_sock, client_message, 2000, 0)) > 0){
 			//display message
-			cout << client_message;
+			cout << client_message<<"\n";
 		}
-		
-		if(read_size == 0){
-			puts("\nclient disconnected");
-			fflush(stdout);
-		}
-		else if (read_size == -1){
-			perror("\nreception failed");
-		}
+	memset(client_message,0,256);
 	}
 	return 0;
 }

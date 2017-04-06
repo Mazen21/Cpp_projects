@@ -1,6 +1,5 @@
 #ifndef Bank_HPP
 #define	Bank_HPP
-
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -38,11 +37,12 @@ class LoggerFile : Logger {
 	void printV(string const &); 
 };
 
-/*LoggerTCP class*/
+//~ /*LoggerTCP class*/
 class LoggerTCP : Logger {
-	public:
+  private:
 	int sock;
 	struct sockaddr_in server;
+  public:
 	LoggerTCP();
 	void printE(string const &);
 	void printW(string const &);

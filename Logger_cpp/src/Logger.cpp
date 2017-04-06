@@ -1,4 +1,5 @@
 #include "../header/Logger.hpp"
+#include "string.h"
 
 /*Logger Class*/
 void Logger::printE(string const &mystr){
@@ -67,10 +68,20 @@ LoggerTCP::LoggerTCP(){
 }
 
 void LoggerTCP::printE(string const &mystr){
+	
 	if (send(sock, (const char*)mystr.c_str(), strlen((const char*)mystr.c_str()), 0) < 0){
 		puts("Send failed");
 	}
 }	
-	
+void LoggerTCP::printW(string const &mystr){
+	if (send(sock, (const char*)mystr.c_str(), strlen((const char*)mystr.c_str()), 0) < 0){
+		puts("Send failed");
+	}
+}	
+void LoggerTCP::printV(string const &mystr){
+	if (send(sock, (const char*)mystr.c_str(), strlen((const char*)mystr.c_str()), 0) < 0){
+		puts("Send failed");
+	}
+}	
 	
 	
