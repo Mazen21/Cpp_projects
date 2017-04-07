@@ -8,7 +8,7 @@ using namespace std;
 int main(){
     LoggerTCP Lt;
 	
-    Lt.printE("Error");
+    Lt.printE("big errors");
     Lt.printW("Warning");
     Lt.printV("verbosity");
 }

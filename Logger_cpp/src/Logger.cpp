@@ -69,7 +69,8 @@ LoggerTCP::LoggerTCP(){
 
 void LoggerTCP::printE(string const &mystr){
 	char server_reply[2000];
-	if (send(sock, (const char*)mystr.c_str(), strlen((const char*)mystr.c_str()), 0) < 0){
+	string output = "ERROR : " + mystr;
+	if (send(sock, (const char*)output.c_str(), strlen((const char*)output.c_str()), 0) < 0){
 		puts("Send failed");
 	}
 	if( recv(sock , server_reply , 2000 , 0) < 0){

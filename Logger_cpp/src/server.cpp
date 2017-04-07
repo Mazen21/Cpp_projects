@@ -53,9 +53,8 @@ int main( int argc, char*argv[]){
 		while((read_size = recv(client_sock, client_message, 2000, 0)) > 0){
 			 write(client_sock , client_message , strlen(client_message));
 			 puts(client_message);
+			 memset(client_message,0,256);
 		}
-		
-	memset(client_message,0,256);
 	}
 	return 0;
 }
