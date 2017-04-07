@@ -48,9 +48,7 @@ int main( int argc, char*argv[]){
 			perror("accept failed");
 			return 1;
 		}
-		//~ cout<<"\n";
-		//Receive a message from client
-		//~ memset(client_message,0,256);
+
 		while((read_size = recv(client_sock, client_message, 2000, 0)) > 0){
 			 write(client_sock , client_message , strlen(client_message));
 			 puts(client_message);
