@@ -5,7 +5,7 @@
 #include <netinet/in.h>
 #include <iostream>
 #include <string.h>
-
+#include <unistd.h>
 using namespace std;
 
 int main( int argc, char*argv[]){
@@ -51,9 +51,10 @@ int main( int argc, char*argv[]){
 		//~ cout<<"\n";
 		//Receive a message from client
 		while((read_size = recv(client_sock, client_message, 2000, 0)) > 0){
-			//display message
-			cout << client_message<<"\n";
+			 write(client_sock , client_message , strlen(client_message));
+			 puts(client_message);
 		}
+		
 	memset(client_message,0,256);
 	}
 	return 0;
