@@ -1,10 +1,9 @@
-all: loggy
+main_objects = src/Logger.o main.o
+
+all : main
+
+main: $(main_objects)
+	g++ -o out/loggy $(main_objects)
 
 clean:
-	-rm main.o loggy.exe loggy
-
-loggy: main.o
-	g++ -g -o out/loggy main.o Logger.o
-
-main.o: main.cpp
-	g++ -c -g main.cpp src/Logger.cpp
+	find . -type f -name '*.o' -exec rm {} + 
