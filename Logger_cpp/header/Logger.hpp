@@ -16,6 +16,8 @@ public:
 	virtual void printE(string const &);
 	virtual void printW(string const &);
 	virtual void printV(string const &);
+	
+	string currentDateTime();
 };
 
 /*LoggerConsol class*/

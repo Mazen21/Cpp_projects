@@ -10,7 +10,7 @@ using namespace std;
 
 int main( int argc, char*argv[]){
 	int socket_desc, client_sock, c, read_size;
-	char client_message[256];
+	char client_message[256]="";
 	struct sockaddr_in server, client;
 	
 	//First call to socket () function
@@ -50,6 +50,7 @@ int main( int argc, char*argv[]){
 		}
 		//~ cout<<"\n";
 		//Receive a message from client
+		//~ memset(client_message,0,256);
 		while((read_size = recv(client_sock, client_message, 2000, 0)) > 0){
 			 write(client_sock , client_message , strlen(client_message));
 			 puts(client_message);

@@ -6,10 +6,10 @@
 using namespace std;
  
 int main(){
-    LoggerTCP Lt;
+    LoggerFile Lf("Log_file.log");
 	
-    Lt.printE("big errors");
-    Lt.printW("Warning");
-    Lt.printV("verbosity");
+    Lf.printE("big errors");
+    Lf.printW("Warning");
+    Lf.printV("verbosity");
 }
 

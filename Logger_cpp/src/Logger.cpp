@@ -1,6 +1,6 @@
 #include "../header/Logger.hpp"
 #include "string.h"
-
+#include "ctime"
 /*Logger Class*/
 void Logger::printE(string const &mystr){
 	cout <<"ERROR :"<<mystr<<"\n";
@@ -10,6 +10,14 @@ void Logger::printW(string const &mystr){
 }
 void Logger::printV(string const &mystr){
 	cout <<"VERBOSITY :"<<mystr<<"\n";
+}
+string Logger::currentDateTime(){
+	time_t     now = time(0);
+    struct tm  tstruct;
+    char       buf[80];
+    tstruct = *localtime(&now);
+    strftime(buf, sizeof(buf), "%Y-%m-%d.%X", &tstruct);
+    return buf;
 }
 
 /*LoggerConsol class*/
@@ -32,17 +40,17 @@ LoggerFile::LoggerFile(string filname){
 void LoggerFile::printE(string const &mystr){
 	std::ofstream outfile;
 	outfile.open(this->logfile_name.c_str(), std::ios_base::app);
-	outfile <<"ERROR :"<<mystr<<"\n";
+	outfile <<"[ "<<this->currentDateTime().c_str()<<" ] "<<"ERROR     : "<<mystr<<"\n";
 }
 void LoggerFile::printW(string const &mystr){
 	std::ofstream outfile;
 	outfile.open(this->logfile_name.c_str(), std::ios_base::app);
-	outfile <<"WARNING :"<<mystr<<"\n";
+	outfile <<"[ "<<this->currentDateTime().c_str()<<" ] "<<"WARNING   : "<<mystr<<"\n";
 }
 void LoggerFile::printV(string const &mystr){
 	std::ofstream outfile;
 	outfile.open(this->logfile_name.c_str(), std::ios_base::app);
-	outfile <<"VERBOSITY :"<<mystr<<"\n";	
+	outfile <<"[ "<<this->currentDateTime().c_str()<<" ] "<<"VERBOSITY : "<<mystr<<"\n";	
 }
 
 /*LoggerTCP class*/
@@ -69,7 +77,7 @@ LoggerTCP::LoggerTCP(){
 
 void LoggerTCP::printE(string const &mystr){
 	char server_reply[2000];
-	string output = "ERROR : " + mystr;
+	string output = "[ "+this->currentDateTime()+" ] " + "ERROR     : " + mystr;
 	if (send(sock, (const char*)output.c_str(), strlen((const char*)output.c_str()), 0) < 0){
 		puts("Send failed");
 	}
@@ -79,7 +87,8 @@ void LoggerTCP::printE(string const &mystr){
 }	
 void LoggerTCP::printW(string const &mystr){
 	char server_reply[2000];
-	if (send(sock, (const char*)mystr.c_str(), strlen((const char*)mystr.c_str()), 0) < 0){
+    string output = "[ "+this->currentDateTime()+" ] " + "WARNING   : " + mystr;
+	if (send(sock, (const char*)output.c_str(), strlen((const char*)output.c_str()), 0) < 0){
 		puts("Send failed");
 	}
 	if( recv(sock , server_reply , 2000 , 0) < 0){
@@ -88,7 +97,8 @@ void LoggerTCP::printW(string const &mystr){
 }	
 void LoggerTCP::printV(string const &mystr){
 	char server_reply[2000];
-	if (send(sock, (const char*)mystr.c_str(), strlen((const char*)mystr.c_str()), 0) < 0){
+    string output = "[ "+this->currentDateTime()+" ] " + "VERBOSITY : " + mystr;
+	if (send(sock, (const char*)output.c_str(), strlen((const char*)output.c_str()), 0) < 0){
 		puts("Send failed");
 	}
 	if( recv(sock , server_reply , 2000 , 0) < 0){
